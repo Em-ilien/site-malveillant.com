@@ -13,10 +13,9 @@ if (preg_match("/<script.*>.*<\/.*script.*>/", strtolower($query)))
 if (preg_match("/order *:/", strtolower($query)))
     $queryAccepted = false;
 
-if ($queryAccepted) {
-    $content = file_get_contents("content.txt");
-    file_put_contents("content.txt", $content . "\n" . $query);
-}
+if ($queryAccepted)
+    if (!file_put_contents("content.txt", file_get_contents("content.txt") . "\n" . $query))
+        die("Error while writing to file");
 ?>
 <!DOCTYPE html>
 <html lang="en">
