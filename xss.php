@@ -1,3 +1,13 @@
+<?php
+$content = file_get_contents("content.txt");
+$lines = explode("\n", $content);
+
+$content = "";
+foreach ($lines as $line) {
+    $content .= "<section>" . $line . "</section>";
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +23,12 @@
 
         body {
             margin: 10px;
+            display: flex;
+            flex-direction: column-reverse;
         }
     </style>
 </head>
 <body>
-    <?= file_get_contents("content.txt") ?>
+    <?=$content?>
 </body>
 </html>

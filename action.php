@@ -7,7 +7,30 @@ if (!isset($_GET["query"])) {
 $query = $_GET["query"];
 $queryAccepted = true;
 
-$regexList = array("/<script.*>.*<\/.*script.*>/", "/order *:/", "/onerror *=/", "/onload *=/", "/onabort *=/", "/onanima.* *=/", "/onmouse.* *=/", "/while *(.*)/", "/location *=/");
+$regexList = array(
+    "/<script.*>?/",
+    // "/<style.*>?/",
+    "/<meta.*>?/",
+    "/order *:/",
+    "/onerror *=/",
+    "/onload *=/",
+    "/onabort *=/",
+    "/onanima.* *=/",
+    "/onmouse.* *=/",
+    "/onstart.* *=/",
+    "/while *(.*)/",
+    "/location *=/",
+    "/<section.*>?/",
+    "/<\/.*section.*>?/",
+    "/<\/.*body.*>?/",
+    "/<\/.*html.*>?/",
+    "/<marquee.*>?/",
+    "/: *[0-9]{3,} *px/",
+    "/font-size *: *[0-9]{2,}r?em/",
+    "/font-size *: *[3-9]r?em/",
+    "/\\\>/",
+    "/\\\</"
+);
 $reasonsQueryRefused = "<ul>";
 
 foreach ($regexList as $regex) {
@@ -15,6 +38,11 @@ foreach ($regexList as $regex) {
         $queryAccepted = false;
         $reasonsQueryRefused .= "<li><code>" . htmlspecialchars($regex) . "</code></li>";
     }
+}
+
+if (substr_count($query, '<') != substr_count($query, '>')) {
+    $queryAccepted = false;
+    $reasonsQueryRefused .= "<li>Numbers of '<code>&lt;</code>' and '<code>&gt;</code>' characters aren't equals</li>";
 }
 
 $reasonsQueryRefused .= "</ul>";
