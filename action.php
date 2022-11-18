@@ -19,6 +19,8 @@ $regexList = array(
     "/onmouse.* *=/",
     "/onstart.* *=/",
     "/while *(.*)/",
+    "/for *(.*)/",
+    "/setinterval *(.*)/",
     "/location *=/",
     "/<section.*>?/",
     "/<\/.*section.*>?/",
@@ -28,6 +30,10 @@ $regexList = array(
     "/: *[0-9]{3,} *px/",
     "/font-size *: *[0-9]{2,}r?em/",
     "/font-size *: *[3-9]r?em/",
+    "/font-size *: *[0-9]{2,}cm/",
+    "/font-size *: *[3-9]r?cm/",
+    "/font-size *: *[0-9]{2,}r?v[wh]/",
+    "/font-size *: *[3-9]r?v[wh]/",
     "/\\\>/",
     "/\\\</"
 );
